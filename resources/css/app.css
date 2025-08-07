@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**.blade.php';
+@source '..*.js';
+
+:root{
+    --primary: #021908;
+    --accent: #BBCB2F;
+    --soft: #FEFA95;
+    --pale: #D3E6D6;
+    --background: #FFFFD;
+    
+}
