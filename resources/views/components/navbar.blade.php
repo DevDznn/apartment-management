@@ -1,5 +1,5 @@
 <nav class="fixed top-0 left-0 w-full z-50 bg-[#021908]/50 backdrop-blur-md border-b border-white/10 text-[#FFFFFD] font-poppins transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-6 md:px-10 py-4 flex justify-between items-center">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-4 flex justify-between items-center h-20">
 
     {{-- Logo --}}
     <a href="/" class="flex items-center gap-2 text-xl font-semibold tracking-wide hover:text-[#BBCB2F] transition">
@@ -18,7 +18,7 @@
 
       {{-- Navigation Links --}}
       <div class="flex flex-col gap-3 md:flex-row md:gap-6 w-full md:w-auto">
-        <a href="/apartment_search" class="text-sm font-medium hover:text-[#BBCB2F] transition duration-150">
+        <a href="/apartment" class="text-sm font-medium hover:text-[#BBCB2F] transition duration-150">
           APARTMENT
         </a>
         <a href="/registerlandlord" class="text-sm font-medium hover:text-[#BBCB2F] transition duration-150">

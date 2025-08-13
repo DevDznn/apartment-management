@@ -13,3 +13,18 @@
     --background: #FFFFD;
     
 }
+
+#thumbnails img {
+  border: 3px solid transparent;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+#thumbnails img.ring-4 {
+  border-color: #BBCB2F; /* bright lime */
+  box-shadow: 0 0 8px 2px #BBCB2F;
+  border-radius: 0.375rem; /* rounded-md */
+}
+body{
+    background-color: var(--background);
+
+}
+

@@ -1,5 +1,5 @@
 {{-- Hero Filter Section with Background Image --}}
-<div class="relative min-h-screen pt-24 font-poppins flex items-center justify-center">
+<div class="relative min-h-screen pt-24 flex items-center justify-center">
 
   {{-- Background Image --}}
   <div class="absolute inset-0 bg-cover bg-center brightness-75"
