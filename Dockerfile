@@ -16,10 +16,13 @@ COPY . .
 # Set proper permissions for Laravel
 RUN chown -R www-data:www-data /app && chmod -R 775 /app/storage /app/bootstrap/cache
 
+# Copy .env.example to .env if not exists
+RUN cp .env.example .env
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Generate Laravel key (optional, can override in Render envVars)
+# Generate Laravel key (optional; can override in Render envVars)
 RUN php artisan key:generate
 
 # Install Node dependencies & build assets
