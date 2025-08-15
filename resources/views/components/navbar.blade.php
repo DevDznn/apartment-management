@@ -21,19 +21,19 @@
         <a href="/apartment" class="text-sm font-medium hover:text-[#BBCB2F] transition duration-150">
           APARTMENT
         </a>
-        <a href="/registerlandlord" class="text-sm font-medium hover:text-[#BBCB2F] transition duration-150">
+        <a href="/list_a_property" class="text-sm font-medium hover:text-[#BBCB2F] transition duration-150">
           LIST A PROPERTY
         </a>
       </div>
 
       {{-- Auth Buttons --}}
       <div class="flex flex-col md:flex-row gap-3 md:gap-4 w-full md:w-auto mt-4 md:mt-0">
-        <a href="/register" class="w-full md:w-auto">
+        <a href="/register_tenant" class="w-full md:w-auto">
           <button class="w-full md:w-auto font-medium text-[#021908] bg-[#BBCB2F] hover:bg-[#FEFA95] transition px-5 py-2 rounded-md border border-[#BBCB2F]">
             REGISTER
           </button>
         </a>
-        <a href="/login" class="w-full md:w-auto">
+        <a href="/login_tenant" class="w-full md:w-auto">
           <button class="w-full md:w-auto font-medium text-[#FFFFFD] border border-[#BBCB2F] hover:bg-[#BBCB2F] hover:text-[#021908] transition px-5 py-2 rounded-md">
             LOGIN
           </button>
