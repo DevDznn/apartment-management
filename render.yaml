@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: rent-me
+    env: php
+    plan: free
+    branch: main
+    buildCommand:
+      # Install PHP dependencies
+      - composer install --no-dev --optimize-autoloader
+      # Generate Laravel key
+      - php artisan key:generate
+      # Compile Tailwind + Bootstrap assets
+      - npm install
+      - npm run build
+      # Cache config and routes for better performance
+      - php artisan config:cache
+      - php artisan route:cache
+    startCommand: php artisan serve --host=0.0.0.0 --port $PORT
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://rent-me.onrender.com

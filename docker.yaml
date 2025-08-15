@@ -1,0 +1,32 @@
+# Use PHP CLI with necessary extensions
+FROM php:8.2-cli
+
+# Install system dependencies for Laravel + Node
+RUN apt-get update && apt-get install -y \
+    git unzip curl libzip-dev nodejs npm && docker-php-ext-install pdo_mysql zip
+
+# Set working directory
+WORKDIR /app
+
+# Copy all project files
+COPY . .
+
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Generate Laravel key
+RUN php artisan key:generate
+
+# Install Node dependencies and build assets (Tailwind + Bootstrap)
+RUN npm install
+RUN npm run build
+
+# Cache config and routes
+RUN php artisan config:cache
+RUN php artisan route:cache
+
+# Expose port for Render
+EXPOSE 10000
+
+# Start Laravel
+CMD php artisan serve --host=0.0.0.0 --port=10000
