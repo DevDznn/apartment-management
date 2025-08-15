@@ -41,3 +41,23 @@ Route::get('/login_tenant', function () {
 Route::get('/register_tenant', function () {
     return view('pages.tenant-side.register');
 });
+
+Route::get('/landlord_dashboard', function () {
+    return view('layouts.landlord');
+});
+
+Route::get('/landlord_dashboard/listed_property', function () {
+    return view('landlord.listed-property');
+});
+
+Route::get('/landlord_dashboard/list_property', function () {
+    return view('landlord.list-property');
+});
+
+Route::get('/landlord_dashboard/report_listing', function () {
+    return view('landlord.report-listing');
+});
+
+Route::get('/landlord_dashboard/message', function () {
+    return view('landlord.message');
+});
