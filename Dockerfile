@@ -1,31 +1,64 @@
-# Use PHP CLI with necessary extensions
+# -------------------------
+# 1. Base image
+# -------------------------
 FROM php:8.2-cli
 
-# Install system dependencies for Laravel + Node
+# -------------------------
+# 2. Install system dependencies
+# -------------------------
 RUN apt-get update && apt-get install -y \
-    git unzip curl libzip-dev nodejs npm && docker-php-ext-install pdo_mysql zip
+    git unzip curl libzip-dev nodejs npm \
+    && docker-php-ext-install pdo_mysql zip
 
-# Set working directory
+# -------------------------
+# 3. Set working directory
+# -------------------------
 WORKDIR /app
 
-# Copy all project files
+# -------------------------
+# 4. Copy project files
+# -------------------------
 COPY . .
 
-# Install PHP dependencies
+# -------------------------
+# 5. Install PHP dependencies
+# -------------------------
 RUN composer install --no-dev --optimize-autoloader
 
-# Clear config cache
-RUN php artisan config:clear
+# -------------------------
+# 6. Handle .env and key generation
+# -------------------------
+RUN if [ ! -f .env ]; then cp .env.example .env; fi
+RUN php artisan key:generate --force || echo "APP_KEY already set, skipping."
 
-# Install Node dependencies and build assets
+# -------------------------
+# 7. Install Node dependencies & build assets
+# -------------------------
 RUN npm install
 RUN npm run build
 
-# Set folder permissions
+# -------------------------
+# 8. Cache config & routes
+# -------------------------
+RUN php artisan config:cache
+RUN php artisan route:cache
+
+# -------------------------
+# 9. Set permissions (storage & cache)
+# -------------------------
 RUN chown -R www-data:www-data /app && chmod -R 775 /app/storage /app/bootstrap/cache
 
-# Expose port for Render
-EXPOSE 10000
+# -------------------------
+# 10. Optional: disable DB errors if DB is missing (UI-only friendly)
+# -------------------------
+RUN touch /app/database/database.sqlite || echo "SQLite not needed now."
 
-# Start Laravel
-CMD php artisan serve --host=0.0.0.0 --port=10000
+# -------------------------
+# 11. Expose dynamic port
+# -------------------------
+EXPOSE $PORT
+
+# -------------------------
+# 12. Start Laravel using Render's port
+# -------------------------
+CMD php artisan serve --host=0.0.0.0 --port=$PORT
