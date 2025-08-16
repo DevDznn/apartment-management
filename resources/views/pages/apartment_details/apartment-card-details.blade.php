@@ -23,17 +23,18 @@
       scrollbar-width: none;
     }
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
 </head>
 
 <body>
   <div class="max-w-7xl mx-auto px-6 md:px-10 py-4">
     @include('components.navbar')
     <div class="pt-24 scroll-mt-50">
-         @include('pages.apartment_details.partials.back-button')
+      @include('pages.apartment_details.partials.back-button')
     </div>
- 
+
 
     <div class="grid md:grid-cols-3 gap-1 ">
       <!-- Gallery: 2 columns wide -->

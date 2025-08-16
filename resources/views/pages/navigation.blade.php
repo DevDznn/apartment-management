@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apartment Navigation</title>
 
   <!-- Tailwind CSS -->
@@ -12,17 +13,18 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Mapbox CSS -->
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet"/>
-  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" rel="stylesheet"/>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" rel="stylesheet" />
 
   <!-- Custom CSS -->
   <link href="{{ asset('css/navigation.css') }}" rel="stylesheet" />
 </head>
+
 <body>
 
   <!-- Back Button -->
-  <button 
-    id="backBtn" 
+  <button
+    id="backBtn"
     class="absolute top-4 left-4 z-50 bg-[#021908] hover:bg-[#BBCB2F] hover:text-[#021908] text-[#BBCB2F] p-3 rounded-full shadow-lg transition flex items-center justify-center"
     onclick="window.history.back()"
     aria-label="Back">
@@ -56,4 +58,5 @@
   <!-- Custom JS -->
   <script src="{{ asset('js/navigation.js') }}"></script>
 </body>
+
 </html>

@@ -17,7 +17,7 @@
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script src="//unpkg.com/alpinejs" defer></script>
 
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
