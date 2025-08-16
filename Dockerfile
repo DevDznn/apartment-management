@@ -1,19 +1,31 @@
 # -------------------------
-# 1. Base image
+# 1. Base Image
 # -------------------------
-FROM php:8.2-cli
+FROM php:8.2-fpm
+
+# Set working directory
+WORKDIR /var/www/html
 
 # -------------------------
-# 2. Install system dependencies
+# 2. System dependencies
 # -------------------------
 RUN apt-get update && apt-get install -y \
-    git unzip curl libzip-dev nodejs npm \
-    && docker-php-ext-install pdo_mysql zip
+    git \
+    unzip \
+    libzip-dev \
+    curl \
+    zip \
+    npm \
+    nodejs \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    && docker-php-ext-install pdo pdo_mysql zip bcmath gd
 
 # -------------------------
-# 3. Set working directory
+# 3. Install Composer
 # -------------------------
-WORKDIR /app
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # -------------------------
 # 4. Copy project files
@@ -26,39 +38,22 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # -------------------------
-# 6. Handle .env and key generation
-# -------------------------
-RUN if [ ! -f .env ]; then cp .env.example .env; fi
-RUN php artisan key:generate --force || echo "APP_KEY already set, skipping."
-
-# -------------------------
-# 7. Install Node dependencies & build assets
+# 6. Install Node dependencies & build assets
 # -------------------------
 RUN npm install
 RUN npm run build
 
 # -------------------------
-# 8. Cache config & routes
+# 7. Set permissions
 # -------------------------
-RUN php artisan config:cache
-RUN php artisan route:cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # -------------------------
-# 9. Set permissions (storage & cache)
+# 8. Expose port
 # -------------------------
-RUN chown -R www-data:www-data /app && chmod -R 775 /app/storage /app/bootstrap/cache
+EXPOSE 8000
 
 # -------------------------
-# 10. Optional: disable DB errors if DB is missing (UI-only friendly)
-# -------------------------
-RUN touch /app/database/database.sqlite || echo "SQLite not needed now."
-
-# -------------------------
-# 11. Expose dynamic port
-# -------------------------
-EXPOSE $PORT
-
-# -------------------------
-# 12. Start Laravel using Render's port
+# 9. Start Laravel
 # -------------------------
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
