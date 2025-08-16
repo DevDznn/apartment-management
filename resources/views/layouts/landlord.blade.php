@@ -7,6 +7,8 @@
     <title>@yield('title', 'Landlord Dashboard')</title>
     @vite('resources/css/app.css')
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         /* Wave animation */
         .wave {

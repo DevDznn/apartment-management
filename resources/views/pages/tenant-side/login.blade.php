@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landlord Login</title>
+    <title>Tenant Login</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,7 +34,7 @@
 
     <div class="bg-[#FFFFFD] shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-xs sm:max-w-sm border border-[#BBCB2F]/30 animate-fadeInUp relative z-10">
         <!-- Title -->
-        <h2 class="text-2xl font-bold text-center text-[#021908]">Landlord Login</h2>
+        <h2 class="text-2xl font-bold text-center text-[#021908]">Tenant Login</h2>
         <p class="text-sm text-center text-[#021908]/80 mt-2">Enter your credentials to access your account</p>
 
         <!-- Form -->

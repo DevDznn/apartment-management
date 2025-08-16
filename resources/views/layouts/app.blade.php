@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,19 +18,22 @@
   <script src="//unpkg.com/alpinejs" defer></script>
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body>
-    @include('components.navbar')
-    @include('homepage.search')
-    @include('homepage.searched-apartment')
-    @include('homepage.recommended-apartment')
-    @include('homepage.newlisted-apartment')
-    @include('homepage.map-apartment')
-    @include('components.footer')
-    
+  @include('components.navbar')
+  @include('homepage.search')
+  @include('homepage.searched-apartment')
+  @include('homepage.recommended-apartment')
+  @include('homepage.newlisted-apartment')
+  @include('homepage.map-apartment')
+  @include('components.footer')
 
-    {{-- Include Lucide icons --}}
-    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
+
+  {{-- Include Lucide icons --}}
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/lucide.min.js"></script>
 </body>
+
 </html>

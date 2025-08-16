@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landlord Sign Up</title>
+    <title>Tenant Sign Up</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,7 +39,7 @@
         <div class="bg-[#FFFFFD] shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-lg border border-[#BBCB2F]/30 animate-fadeInUp relative z-10">
             <!-- Title -->
             <h2 class="text-2xl font-bold text-center text-[#021908]">Create Your Account</h2>
-            <p class="text-sm text-center text-[#021908]/80 mt-2">Sign up to list and manage your apartments</p>
+            <p class="text-sm text-center text-[#021908]/80 mt-2">Sign up to see available apartments</p>
 
             <!-- Form -->
             <form action="" method="POST" class="mt-6 space-y-4">
