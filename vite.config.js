@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import fullReload from 'vite-plugin-full-reload';
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
     server: {
@@ -14,14 +14,21 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+            ],
+            refresh: true, // auto reload when assets change
         }),
+
+        // Watch for Blade, Routes, PHP file changes
         fullReload([
             'resources/views/**/*.blade.php',
             'routes/**/*.php',
             'app/**/*.php',
         ]),
+
+        // Tailwind
         tailwindcss(),
     ],
 });
