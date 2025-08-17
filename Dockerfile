@@ -1,14 +1,12 @@
 # -------------------------
-# 1. Base Image
+# 1. Base PHP image (builder)
 # -------------------------
-FROM php:8.2-fpm
+FROM php:8.2-fpm AS php-builder
 
 # Set working directory
 WORKDIR /var/www/html
 
-# -------------------------
-# 2. System dependencies
-# -------------------------
+# System dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -22,38 +20,42 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     && docker-php-ext-install pdo pdo_mysql zip bcmath gd
 
-# -------------------------
-# 3. Install Composer
-# -------------------------
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# -------------------------
-# 4. Copy project files
-# -------------------------
+# Copy project files
 COPY . .
 
-# -------------------------
-# 5. Install PHP dependencies
-# -------------------------
-RUN composer install --no-dev --optimize-autoloader
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader \
+    && php artisan config:cache \
+    && php artisan route:cache \
+    && php artisan view:cache
+
+# Install Node dependencies & build assets
+RUN npm install && npm run build
 
 # -------------------------
-# 6. Install Node dependencies & build assets
+# 2. Nginx + PHP-FPM production image
 # -------------------------
-RUN npm install
-RUN npm run build
+FROM nginx:alpine
 
-# -------------------------
-# 7. Set permissions
-# -------------------------
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Install PHP-FPM
+RUN apk add --no-cache php8 php8-fpm php8-opcache php8-pdo_mysql php8-bcmath php8-gd php8-xml php8-mbstring php8-tokenizer
 
-# -------------------------
-# 8. Expose port
-# -------------------------
-EXPOSE 8000
+# Set working directory
+WORKDIR /var/www/html
 
-# -------------------------
-# 9. Start Laravel
-# -------------------------
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
+# Copy built Laravel app from builder
+COPY --from=php-builder /var/www/html /var/www/html
+
+# Copy Nginx config
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
+# Set permissions
+RUN chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 80
+
+# Start both PHP-FPM and Nginx
+CMD php-fpm8 -D && nginx -g "daemon off;"
