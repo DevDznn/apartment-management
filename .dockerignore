@@ -1,0 +1,45 @@
+# Ignore Git
+.git
+.gitignore
+
+# Node dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Composer dependencies (installed inside container)
+vendor
+composer.lock
+
+# Laravel caches & logs
+storage/*.key
+storage/framework/*
+storage/logs/*
+bootstrap/cache/*.php
+
+# Environment & config
+.env
+.env.*
+!.env.example
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+.idea
+.vscode
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Misc build files
+public/hot
+public/storage
+public/mix-manifest.json

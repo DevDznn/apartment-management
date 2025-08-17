@@ -1,5 +1,5 @@
 # -------------------------
-# 1. Base PHP image (build & runtime)
+# 1. Base PHP image
 # -------------------------
 FROM php:8.2-fpm
 
@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     nginx \
     supervisor \
+    gettext \
     && docker-php-ext-install pdo pdo_mysql zip bcmath gd
 
 # Install Composer
@@ -37,16 +38,21 @@ RUN composer install --no-dev --optimize-autoloader \
 # Install Node dependencies & build assets
 RUN npm install && npm run build
 
-# Copy Nginx config
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+# Copy Nginx config template (with $PORT variable)
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf.template
 
-# Supervisor config (to run php-fpm + nginx together)
+# Supervisor config
 COPY ./supervisord.conf /etc/supervisord.conf
+
+# Entrypoint script (to inject $PORT into nginx config)
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-EXPOSE 80
+# Expose port (Railway will map to $PORT)
+EXPOSE 8080
 
-# Run both php-fpm and nginx via supervisor
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+# Run start script (envsubst + supervisor)
+CMD ["/start.sh"]
