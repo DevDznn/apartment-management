@@ -7,7 +7,7 @@
     <title>Tenant Sign Up</title>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <style>
         /* Fade & scale animation */
         @keyframes fadeInUp {
@@ -155,7 +155,7 @@
             confirmInput.type = confirmInput.type === 'password' ? 'text' : 'password';
         });
     </script>
-    
+
 </body>
 
 </html>

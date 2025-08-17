@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tenant Login</title>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <style>
         /* Fade & scale animation */
         @keyframes fadeInUp {
@@ -14,11 +15,13 @@
                 opacity: 0;
                 transform: translateY(20px) scale(0.98);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
+
         .animate-fadeInUp {
             animation: fadeInUp 0.5s ease-out forwards;
         }
@@ -44,30 +47,28 @@
             <!-- Email -->
             <div>
                 <label for="email" class="block text-sm font-medium text-[#021908]">Email</label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
                     value="{{ old('email') }}"
                     class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#BBCB2F] focus:border-transparent bg-white"
-                    required
-                >
+                    required>
             </div>
 
             <!-- Password -->
             <div>
                 <label for="password" class="block text-sm font-medium text-[#021908]">Password</label>
                 <div class="relative mt-1 group ">
-                    <input 
-                        type="password" 
-                        name="password" 
+                    <input
+                        type="password"
+                        name="password"
                         id="password"
                         class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#BBCB2F] focus:border-transparent bg-white"
-                        required
-                    >
+                        required>
                     <!-- Eye Toggle -->
                     <span class="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer  opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200" id="togglePassword">
-                        <x-eye-icon/>
+                        <x-eye-icon />
                     </span>
                 </div>
             </div>
@@ -89,7 +90,7 @@
 
         <!-- Signup Link -->
         <p class="text-sm text-center mt-5 text-[#021908]/70">
-            Don't have an account? 
+            Don't have an account?
             <a href="/register_tenant" class="text-[#BBCB2F] font-medium hover:underline">Sign up</a>
         </p>
     </div>

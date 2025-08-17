@@ -8,7 +8,7 @@
     <title>Landlord Registration</title>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
@@ -19,10 +19,9 @@
     <div class="absolute top-0 left-0 w-64 h-64 bg-[#BBCB2F]/20 rounded-full blur-3xl"></div>
     <div class="absolute bottom-0 right-0 w-72 h-72 bg-[#D3E6D6]/30 rounded-full blur-3xl"></div>
 
-    <div 
+    <div
         class="bg-[#FFFFFD] shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-md border border-[#BBCB2F]/30 animate-fadeInUp relative z-10"
-        x-data="{ step:1, password:'', confirmPassword:'', passwordError:'' }"
-    >
+        x-data="{ step:1, password:'', confirmPassword:'', passwordError:'' }">
 
         <!-- Header -->
         <h2 class="text-2xl font-bold text-center text-[#021908]">Landlord Registration</h2>
@@ -143,4 +142,5 @@
         });
     </script>
 </body>
+
 </html>
