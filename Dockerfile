@@ -1,7 +1,7 @@
 # -------------------------
-# 1. Base PHP image (builder)
+# 1. Base PHP image (build & runtime)
 # -------------------------
-FROM php:8.2-fpm AS php-builder
+FROM php:8.2-fpm
 
 # Set working directory
 WORKDIR /var/www/html
@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
+    nginx \
+    supervisor \
     && docker-php-ext-install pdo pdo_mysql zip bcmath gd
 
 # Install Composer
@@ -35,27 +37,16 @@ RUN composer install --no-dev --optimize-autoloader \
 # Install Node dependencies & build assets
 RUN npm install && npm run build
 
-# -------------------------
-# 2. Nginx + PHP-FPM production image
-# -------------------------
-FROM nginx:alpine
-
-# Install PHP-FPM
-RUN apk add --no-cache php8 php8-fpm php8-opcache php8-pdo_mysql php8-bcmath php8-gd php8-xml php8-mbstring php8-tokenizer
-
-# Set working directory
-WORKDIR /var/www/html
-
-# Copy built Laravel app from builder
-COPY --from=php-builder /var/www/html /var/www/html
-
 # Copy Nginx config
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
+# Supervisor config (to run php-fpm + nginx together)
+COPY ./supervisord.conf /etc/supervisord.conf
+
 # Set permissions
-RUN chown -R nginx:nginx /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 80
 
-# Start both PHP-FPM and Nginx
-CMD php-fpm8 -D && nginx -g "daemon off;"
+# Run both php-fpm and nginx via supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
