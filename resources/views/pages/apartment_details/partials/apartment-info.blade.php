@@ -1,8 +1,10 @@
 <div class="mt-8 bg-[#FFFFFD] border border-[#D3E6D6] rounded-xl p-6 shadow-sm w-full max-w-full">
 
     <!-- Top row: Price and Address + Actions -->
-    <div class="flex justify-between items-center gap-4 flex-nowrap">
-        <div class="min-w-[250px] max-w-[calc(100%-80px)]">
+    <!-- Top row: Price and Address + Actions -->
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <!-- Left: Price + Address -->
+        <div class="w-full sm:min-w-[250px]">
             <h2 class="text-2xl sm:text-3xl font-extrabold text-[#021908] mb-1 truncate">
                 ₱15,000.00 <span class="text-lg font-normal">per month</span>
             </h2>
@@ -10,7 +12,8 @@
             <p class="text-[#021908]/70 text-sm mt-1 truncate">123 Sample Street, Santa Rosa, Laguna</p>
         </div>
 
-        <div class="flex gap-4 text-[#021908]/70 flex-shrink-0">
+        <!-- Right: Save + Report Buttons -->
+        <div class="flex gap-3 text-[#021908]/70 flex-shrink-0 self-end sm:self-auto">
             <button
                 class="p-2 rounded-md hover:text-[#BBCB2F] hover:bg-[#BBCB2F]/20 transition flex items-center justify-center"
                 title="Bookmark" aria-label="Bookmark">
@@ -23,6 +26,7 @@
             </button>
         </div>
     </div>
+
 
 
     <!-- Owner Section -->

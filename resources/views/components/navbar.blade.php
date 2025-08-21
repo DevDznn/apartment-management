@@ -14,7 +14,7 @@
 
     {{-- Menu Items --}}
     <div id="menuItems"
-         class="hidden md:flex flex-col md:flex-row items-start md:items-center gap-6 absolute md:static top-full left-0 w-full md:w-auto bg-[#021908]/90 md:bg-transparent backdrop-blur-md md:backdrop-blur-none px-6 py-4 md:p-0 shadow-md md:shadow-none rounded-b-lg transition-all duration-300 ease-in-out">
+      class="hidden md:flex flex-col md:flex-row items-start md:items-center gap-6 absolute md:static top-full left-0 w-full md:w-auto bg-[#021908]/90 md:bg-transparent backdrop-blur-md md:backdrop-blur-none px-6 py-4 md:p-0 shadow-md md:shadow-none rounded-b-lg transition-all duration-300 ease-in-out">
 
       {{-- Navigation Links --}}
       <div class="flex flex-col gap-3 md:flex-row md:gap-6 w-full md:w-auto">
@@ -45,12 +45,20 @@
 </nav>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
     const menuToggle = document.getElementById('menuToggle');
     const menuItems = document.getElementById('menuItems');
 
+    // Toggle on click
     menuToggle.addEventListener('click', () => {
       menuItems.classList.toggle('hidden');
+    });
+
+    // Auto-hide when scrolling
+    window.addEventListener('scroll', () => {
+      if (!menuItems.classList.contains('hidden')) {
+        menuItems.classList.add('hidden');
+      }
     });
   });
 </script>

@@ -2,7 +2,7 @@
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
     lucide.createIcons();
   });
 </script>
@@ -27,40 +27,51 @@
       Showing <span x-text="apartments.length"></span> apartments found
     </p>
 
+    <!-- Apartments Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
       <template x-for="(item, index) in paginated" :key="index">
-                  @include('components.apartment-card')
-
+        @include('components.apartment-card')
       </template>
     </div>
 
+    <!-- Pagination -->
     <div class="flex flex-wrap justify-center items-center gap-2 mt-10 text-[#021908] text-sm font-medium">
+
+      <!-- Prev Button -->
       <button
-        @click="currentPage = Math.max(currentPage - 1, 1)"
+        @click="
+          currentPage = Math.max(currentPage - 1, 1);
+          $nextTick(() => $el.closest('section').scrollIntoView({ behavior: 'smooth' }));
+        "
         :disabled="currentPage === 1"
-        class="px-4 py-2 rounded-full hover:bg-[#BBCB2F] disabled:opacity-40 transition"
-      >
+        class="px-4 py-2 rounded-full hover:bg-[#BBCB2F] disabled:opacity-40 transition">
         Prev
       </button>
 
+      <!-- Page Numbers -->
       <template x-for="page in totalPages" :key="page">
         <button
-          @click="currentPage = page"
+          @click="
+            currentPage = page;
+            $nextTick(() => $el.closest('section').scrollIntoView({ behavior: 'smooth' }));
+          "
           :class="{
             'bg-[#BBCB2F] text-[#021908]': page === currentPage,
             'hover:bg-[#BBCB2F]/60': page !== currentPage
           }"
-          class="w-8 h-8 rounded-full flex items-center justify-center transition"
-        >
+          class="w-8 h-8 rounded-full flex items-center justify-center transition">
           <span x-text="page"></span>
         </button>
       </template>
 
+      <!-- Next Button -->
       <button
-        @click="currentPage = Math.min(currentPage + 1, totalPages)"
+        @click="
+          currentPage = Math.min(currentPage + 1, totalPages);
+          $nextTick(() => $el.closest('section').scrollIntoView({ behavior: 'smooth' }));
+        "
         :disabled="currentPage === totalPages"
-        class="px-4 py-2 rounded-full hover:bg-[#BBCB2F] disabled:opacity-40 transition"
-      >
+        class="px-4 py-2 rounded-full hover:bg-[#BBCB2F] disabled:opacity-40 transition">
         Next
       </button>
     </div>

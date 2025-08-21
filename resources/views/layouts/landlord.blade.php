@@ -60,7 +60,7 @@
                     ['name' => 'Listed Apartments', 'icon' => 'home', 'route' => 'landlord_dashboard/listed_property'],
                     ['name' => 'List a Property', 'icon' => 'plus-square', 'route' => 'landlord_dashboard/list_property'],
                     ['name' => 'Reported', 'icon' => 'alert-triangle', 'route' => 'landlord_dashboard/report_listing'],
-                    ['name' => 'Messages', 'icon' => 'message-circle', 'route' => 'landlord_dashboard/message'],
+                    ['name' => 'Messages', 'icon' => 'message-circle', 'route' => 'messages'],
                     ];
                     $activePage = 'Listed Apartments'; // Example active link
                     @endphp
