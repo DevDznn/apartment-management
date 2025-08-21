@@ -43,7 +43,7 @@ Route::get('/register_tenant', function () {
 });
 
 Route::get('/landlord_dashboard', function () {
-    return view('layouts.landlord');
+    return redirect('/landlord_dashboard/listed_property');
 });
 
 Route::get('/landlord_dashboard/listed_property', function () {

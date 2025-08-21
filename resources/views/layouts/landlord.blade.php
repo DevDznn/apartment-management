@@ -38,7 +38,7 @@
     </style>
 </head>
 
-<body class="bg-[#D3E6D6] font-sans">
+<body class="bg-[#fffffd] font-sans">
 
     <div class="flex h-screen">
 
